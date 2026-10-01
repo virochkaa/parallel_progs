@@ -1,0 +1,310 @@
+varvara@MacBook-Pro-Varvara lab1 % ./example19
+Result = 14850
+
+
+varvara@MacBook-Pro-Varvara lab1 % ./examplef
+Result = 15150.7
+varvara@MacBook-Pro-Varvara lab1 % time ./examplef
+Result = 15150.7
+./examplef  2.56s user 0.03s system 99% cpu 2.608 total
+
+
+varvara@MacBook-Pro-Varvara lab1 % g++-16 \
+-isysroot "$(xcrun --show-sdk-path)" \
+-fopenmp \
+examplef.cpp -o examplef_omp
+varvara@MacBook-Pro-Varvara lab1 % ./examplef_omp
+Result = 15150.7
+
+varvara@MacBook-Pro-Varvara lab1 % time env OMP_NUM_THREADS=1 ./examplef_omp
+Result = 15150.7
+env OMP_NUM_THREADS=1 ./examplef_omp  2.54s user 0.03s system 99% cpu 2.571 total
+varvara@MacBook-Pro-Varvara lab1 % time env OMP_NUM_THREADS=2 ./examplef_omp
+Result = 15150.7
+env OMP_NUM_THREADS=2 ./examplef_omp  2.62s user 0.02s system 198% cpu 1.332 total
+varvara@MacBook-Pro-Varvara lab1 % time env OMP_NUM_THREADS=3 ./examplef_omp
+Result = 15150.7
+env OMP_NUM_THREADS=3 ./examplef_omp  2.63s user 0.02s system 287% cpu 0.920 total
+varvara@MacBook-Pro-Varvara lab1 % time env OMP_NUM_THREADS=4 ./examplef_omp
+Result = 15150.7
+env OMP_NUM_THREADS=4 ./examplef_omp  2.66s user 0.01s system 390% cpu 0.685 total
+varvara@MacBook-Pro-Varvara lab1 % 
+
+
+varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=4 ./example1
+Initial thread: id = 1234, size = 0
+Number of threads = 4
+Hello World from thread 1
+Number of threads = 4
+Hello World from threadNumber of threads = 4
+Hello World from thread 0
+Number of threads = 4
+Hello World from thread 3
+ 2
+
+ varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=3 ./example1
+Initial thread: id = 1234, size = 0
+Number of threads = 3
+Hello World from thread 0
+Number of threads = Number of threads = 3
+Hello World from thread 2
+3
+Hello World from thread 1
+varvara@MacBook-Pro-Varvara lab1 % 
+
+
+varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=4 ./example2
+Thread Thread Thread 0, partial sum = 300
+Thread 2, partial sum = 1550
+3, partial sum = 2175
+1, partial sum = 925
+Final sum = 4950
+
+
+varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=4 ./example2_bad
+Thread Thread Thread 0, partial sum = 34950, partial sum = 4950
+
+2, partial sum = 4950
+Thread 1, partial sum = 4950
+Final sum = 4950
+varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=4 ./example2_bad
+Thread Thread Thread Thread 3, partial sum = 04950, partial sum = 4950
+2, partial sum = 4950
+1, partial sum = 4950
+
+Final sum = 4950
+varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=4 ./example2_bad
+Thread 2, partial sum = 4950Thread 0, partial sum = 4950
+Thread Thread 3, partial sum = 4950
+
+1, partial sum = 4950
+Final sum = 4950
+varvara@MacBook-Pro-Varvara lab1 % 
+varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=4 ./example2_bad
+Thread Thread 03, partial sum = 4950
+, partial sum = 4950
+Thread 1, partial sum = 4950
+Thread 2, partial sum = 4950
+Final sum = 4950
+varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=4 ./example2_bad
+Thread 2, partial sum = Thread 1, partial sum = 49504950
+
+Thread 0, partial sum = 4950
+Thread 3, partial sum = 4950
+Final sum = 4950
+varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=4 ./example2_bad
+Thread Thread 2, partial sum = 35311
+, partial sum = 3531
+Thread 0, partial sum = 3531
+Thread 3, partial sum = 3531
+Final sum = 3531
+
+varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=4 ./example2_bad
+Thread 2, partial sum = 2775
+Thread 3, partial sum = 4950
+Thread 1, partial sum = 4950
+Thread 0, partial sum = 4950
+Final sum = 4950
+varvara@MacBook-Pro-Varvara lab1 % 
+
+varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=4 ./example2_bad
+Thread Thread 0, partial sum = 4355
+Thread 3, partial sum = 4355
+1, partial sum = 4355
+Thread 2, partial sum = 4355
+Final sum = 4355
+
+
+varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=4 ./example2_very_bad
+Thread Thread 1, partial sum = -1997640995
+Thread 2, partial sum = -1997640995
+Thread 0, partial sum = -1997640995
+3, partial sum = -1997640995
+Final sum = -1997640995
+
+
+varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=4 ./example2_very_bad
+Thread Thread Thread Thread 3, partial sum = 10906942111, partial sum = 109069421120, partial sum = 1090694211
+, partial sum = 1090694211
+
+
+Final sum = 1090694211
+
+
+varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=4 ./example1_bad
+Initial thread: id = 1234, size = 0
+Number of threads = 4
+Hello World from thread 1
+Number of threads = 4
+Hello World from thread 0
+Number of threads = 4
+Hello World from thread 2
+Number of threads = 4
+Hello World from thread 3
+
+varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=4 ./example1_bad
+Initial thread: id = 1234, size = 0
+Number of threads = 4
+Number of threads = Hello World from thread 1
+Number of threads = Number of threads = 4
+Hello World from thread 2
+4
+Hello World from thread 0
+4
+Hello World from thread 3
+
+varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=4 ./example1_bad
+Initial thread: id = 1234, size = 0
+Number of threads = 4
+Number of threads = 4
+Number of threads = 4
+Hello World from thread 3
+Number of threads = Hello World from thread 1
+4
+Hello World from thread 2
+Hello World from thread 0
+varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=4 ./example1_bad
+Initial thread: id = 1234, size = 0
+Number of threads = 4
+Hello World from thread 1
+Number of threads = 4
+Hello World from thread 2
+Number of threads = 4
+Hello World from thread 0
+Number of threads = 4
+Hello World from thread 3
+
+
+arvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=4 ./example2_critical
+Thread Thread Thread Thread 2, partial sum = 4950
+3, partial sum = 4950
+01, partial sum = 4950
+, partial sum = 4950
+Final sum = 4950
+varvara@MacBook-Pro-Varvara lab1 % 
+
+
+varvara@MacBook-Pro-Varvara lab1 % time ./mandelbrot_seq
+./mandelbrot_seq  0.69s user 0.06s system 55% cpu 1.368 total
+
+dynamic (c временем записи файла - косяк)
+varvara@MacBook-Pro-Varvara lab1 % time env OMP_NUM_THREADS=1 ./mandelbrot_omp
+env OMP_NUM_THREADS=1 ./mandelbrot_omp  0.69s user 0.06s system 54% cpu 1.378 total
+
+varvara@MacBook-Pro-Varvara lab1 % time env OMP_NUM_THREADS=2 ./mandelbrot_omp
+env OMP_NUM_THREADS=2 ./mandelbrot_omp  0.68s user 0.07s system 156% cpu 0.482 total
+
+varvara@MacBook-Pro-Varvara lab1 % time env OMP_NUM_THREADS=4 ./mandelbrot_omp
+env OMP_NUM_THREADS=4 ./mandelbrot_omp  0.69s user 0.06s system 237% cpu 0.318 total
+
+varvara@MacBook-Pro-Varvara lab1 % time env OMP_NUM_THREADS=8 ./mandelbrot_omp
+env OMP_NUM_THREADS=8 ./mandelbrot_omp  0.79s user 0.06s system 382% cpu 0.221 total
+
+
+dynamic (без времени записи)
+varvara@MacBook-Pro-Varvara lab1 % time env OMP_NUM_THREADS=1 ./mandelbrot_omp
+Calculation time: 0.608858 s
+env OMP_NUM_THREADS=1 ./mandelbrot_omp  0.69s user 0.07s system 55% cpu 1.373 total
+varvara@MacBook-Pro-Varvara lab1 % time env OMP_NUM_THREADS=2 ./mandelbrot_omp
+Calculation time: 0.310562 s
+env OMP_NUM_THREADS=2 ./mandelbrot_omp  0.69s user 0.06s system 168% cpu 0.446 total
+varvara@MacBook-Pro-Varvara lab1 % time env OMP_NUM_THREADS=4 ./mandelbrot_omp
+Calculation time: 0.158399 s
+env OMP_NUM_THREADS=4 ./mandelbrot_omp  0.71s user 0.06s system 256% cpu 0.301 total
+varvara@MacBook-Pro-Varvara lab1 % time env OMP_NUM_THREADS=8 ./mandelbrot_omp
+Calculation time: 0.094701 s
+env OMP_NUM_THREADS=8 ./mandelbrot_omp  0.81s user 0.06s system 371% cpu 0.234 total
+
+static
+varvara@MacBook-Pro-Varvara lab1 % time env OMP_NUM_THREADS=1 ./mandelbrot_omp
+Calculation time: 0.609644 s
+env OMP_NUM_THREADS=1 ./mandelbrot_omp  0.69s user 0.06s system 56% cpu 1.334 total
+varvara@MacBook-Pro-Varvara lab1 % time env OMP_NUM_THREADS=2 ./mandelbrot_omp
+Calculation time: 0.311588 s
+env OMP_NUM_THREADS=2 ./mandelbrot_omp  0.69s user 0.06s system 168% cpu 0.447 total
+varvara@MacBook-Pro-Varvara lab1 % time env OMP_NUM_THREADS=3 ./mandelbrot_omp
+Calculation time: 0.493544 s
+^[[Aenv OMP_NUM_THREADS=3 ./mandelbrot_omp  0.68s user 0.06s system 115% cpu 0.643 total
+varvara@MacBook-Pro-Varvara lab1 % time env OMP_NUM_THREADS=4 ./mandelbrot_omp
+Calculation time: 0.30143 s
+env OMP_NUM_THREADS=4 ./mandelbrot_omp  0.69s user 0.06s system 172% cpu 0.434 total
+varvara@MacBook-Pro-Varvara lab1 % time env OMP_NUM_THREADS=8 ./mandelbrot_omp
+Calculation time: 0.210918 s
+env OMP_NUM_THREADS=8 ./mandelbrot_omp  0.71s user 0.06s system 222% cpu 0.343 total
+varvara@MacBook-Pro-Varvara lab1 % 
+varvara@MacBook-Pro-Varvara lab1 % shasum mandelbrot.ppm\nshasum mandelbrot_omp.ppm
+67d7869e01743b3256edf0e3a4138d1bed72c55a  mandelbrot.ppm
+67d7869e01743b3256edf0e3a4138d1bed72c55a  mandelbrot_omp.ppm
+
+varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=1 ./mandelbrot_omp
+shasum mandelbrot_omp.ppm
+Calculation time: 0.594878 s
+67d7869e01743b3256edf0e3a4138d1bed72c55a  mandelbrot_omp.ppm
+varvara@MacBook-Pro-Varvara lab1 % varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=2 ./mandelbrot_omp
+shasum mandelbrot_omp.ppm
+Calculation time: 0.312908 s
+67d7869e01743b3256edf0e3a4138d1bed72c55a  mandelbrot_omp.ppm
+varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=4 ./mandelbrot_omp
+shasum mandelbrot_omp.ppm
+Calculation time: 0.300509 s
+67d7869e01743b3256edf0e3a4138d1bed72c55a  mandelbrot_omp.ppm
+varvara@MacBook-Pro-Varvara lab1 % 
+varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=8 ./mandelbrot_omp
+shasum mandelbrot_omp.ppm
+Calculation time: 0.210144 s
+67d7869e01743b3256edf0e3a4138d1bed72c55a  mandelbrot_omp.ppm
+
+static
+varvara@MacBook-Pro-Varvara lab1 % varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=1 ./mandelbrot_omp
+Calculation time: 0.609872 s
+varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=1 ./mandelbrot_omp
+Calculation time: 0.59914 s
+varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=1 ./mandelbrot_omp
+Calculation time: 0.600135 s
+varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=2 ./mandelbrot_omp
+Calculation time: 0.321917 s
+varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=2 ./mandelbrot_omp
+Calculation time: 0.309735 s
+varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=2 ./mandelbrot_omp
+Calculation time: 0.309761 s
+varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=4 ./mandelbrot_omp
+Calculation time: 0.303939 s
+varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=4 ./mandelbrot_omp
+Calculation time: 0.316452 s
+varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=4 ./mandelbrot_omp
+Calculation time: 0.30286 s
+varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=8 ./mandelbrot_omp
+Calculation time: 0.211124 s
+varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=8 ./mandelbrot_omp
+Calculation time: 0.21154 s
+varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=8 ./mandelbrot_omp
+Calculation time: 0.211577 s
+
+dynamic
+varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=1 ./mandelbrot_omp
+Calculation time: 0.6105 s
+varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=1 ./mandelbrot_omp
+Calculation time: 0.598327 s
+varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=1 ./mandelbrot_omp
+Calculation time: 0.609372 s
+varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=2 ./mandelbrot_omp
+Calculation time: 0.310766 s
+varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=2 ./mandelbrot_omp
+Calculation time: 0.309373 s
+varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=2 ./mandelbrot_omp
+Calculation time: 0.311315 s
+varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=4 ./mandelbrot_omp
+Calculation time: 0.158423 s
+varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=4 ./mandelbrot_omp
+Calculation time: 0.158461 s
+varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=4 ./mandelbrot_omp
+Calculation time: 0.158767 s
+varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=4 ./mandelbrot_omp
+Calculation time: 0.158374 s
+varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=8 ./mandelbrot_omp
+Calculation time: 0.096201 s
+varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=8 ./mandelbrot_omp
+Calculation time: 0.095401 s
+varvara@MacBook-Pro-Varvara lab1 % env OMP_NUM_THREADS=8 ./mandelbrot_omp
+Calculation time: 0.09474 s
+varvara@MacBook-Pro-Varvara lab1 % 
